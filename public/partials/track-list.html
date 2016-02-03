@@ -1,0 +1,6 @@
+<h2>Top Tracks</h2>
+<ul class="artists">
+    <li ng-repeat="track in tracks | filter:query | orderBy:orderProp">
+       {{track.name}}
+    </li>
+</ul>
