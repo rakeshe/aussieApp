@@ -7,11 +7,12 @@
  * @version    1.0
  */
 namespace App\Api\Controllers;
+
 use App\BaseController;
 use App\Helpers\ConfigHelper;
 use App\ModelFactory;
 
-class Controller extends  BaseController
+class Controller extends BaseController
 {
     const MODULE_NAME = 'Api';
 
@@ -22,7 +23,8 @@ class Controller extends  BaseController
     protected $providerModel;
 
 
-    public function __construct(){
+    public function __construct()
+    {
         parent::init();
         $this->setProviderName();
 
@@ -35,20 +37,32 @@ class Controller extends  BaseController
 
         $jsonResponse = $this->providerModel->call($this->router->getActionName());
 
-        if($jsonResponse){
-            echo $jsonResponse;
-        }
+        $this->sendResponse($jsonResponse);
+
     }
 
 
     protected function setProviderName()
     {
-        if(!empty($this->globalConfig['defaultProvider'])){
+        if (!empty($this->globalConfig['defaultProvider'])) {
             $this->providerName = $this->globalConfig['defaultProvider'];
         }
 
     }
 
+    protected function sendResponse($responseBody)
+    {
+        if (empty($responseBody)) {
+            $responseContainer = [
+                'success' => false,
+                'errors'  => 'Hmmm this is not what you are looking for'
+            ];
+
+            $responseBody = json_encode($responseContainer);
+        }
+        header('Content-type: application/json');
+        echo $responseBody;
+    }
 
 
 }
