@@ -1,0 +1,9 @@
+{
+    "ApplicationName": "Aussie App",
+    "ArtistList": {
+        "pageTitle": "Popular artists by country",
+        "InputPlaceholderText": "Enter country name...",
+        "SearchCTA": "Search",
+        "HelpBlockText": "Try for example: \"Australia\" or \"Canada\""
+    }
+}
