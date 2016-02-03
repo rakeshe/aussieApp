@@ -1,0 +1,32 @@
+<h2>{{config.ArtistList.pageTitle}}</h2>
+<div>
+        <div>
+            <form>
+                <input ng-model="keywords" placeholder="{{config.ArtistList.InputPlaceholderText}}" class="search-box">
+                <button type="submit" class="btn search-btn" ng-click="search()">{{config.ArtistList.SearchCTA}}</button>
+                <p class="help-block">{{config.ArtistList.HelpBlockText}}</p>
+            </form>
+        </div>
+        <div >
+            <!-- result set -->
+            <ul class="artists">
+                <li ng-repeat="artist in artists | filter:query | orderBy:orderProp" class="items">
+                    <a href="#/artist/{{artist.mbid}}" class="thumb"><img ng-src="{{artist.image}}" alt="{{artist.name}}"></a>
+                    <a href="#/artist/{{artist.mbid}}">{{artist.name}}</a>
+
+                </li>
+            </ul>
+
+
+        </div>
+    <!-- pagination controls -->
+    <div class="paginator" ng-show="currentPage != ''">
+        <button ng-disabled="checkPrevious()"  ng-click="previousPage()" class="{{buttonClass}}">
+            Previous
+        </button>
+        <span class="{{buttonClass}}"> {{currentPage}} </span>
+        <button ng-disabled="checkNext()" ng-click="nextPage()" class="{{buttonClass}}">
+            Next
+        </button>
+    </div>
+</div>
